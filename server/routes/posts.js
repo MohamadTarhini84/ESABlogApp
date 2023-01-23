@@ -1,6 +1,7 @@
 const router = require('express').Router()
 const Post = require("../models/post")
 const mongoose=require("mongoose")
+const upload=require('../controllers/uploadController')
 
 function handleErrors(error){
     let err={}
@@ -12,7 +13,7 @@ function handleErrors(error){
     return err
 }
 
-router.get('/posts/:userId', (req,res)=>{
+router.get('/:userId', (req,res)=>{
     try{
         const posts=getPosts(req.params.userId) //get posts of users connected to user with id of ":userId"
         res.status(200).json(posts)
@@ -21,12 +22,12 @@ router.get('/posts/:userId', (req,res)=>{
     }
 })
 
-router.post('/new/:userId', (req,res)=>{
+router.post('/new/:userId', upload.single('image'), (req,res)=>{
     try{
-        createPost(req.body, req.params.userId)
+        // createPost(req.body, req.params.userId)
         res.status(201)
-    } catch{
-        res.status(401)
+    } catch(error){
+        res.status(401).send(error)
     }
 })
 
@@ -47,6 +48,10 @@ router.patch('/addLike/:postId', (req, res)=>{
         res.status(403)
     }
 })
+
+// async function getPosts(){
+
+// }
 
 async function createPost(userObj, res){ 
     try{
