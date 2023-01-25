@@ -15,7 +15,7 @@ function handleErrors(error){
 
 router.get('/:userId', (req,res)=>{
     try{
-        const posts=getPosts(req.params.userId) //get posts of users connected to user with id of ":userId"
+        // const posts=getPosts(req.params.userId) //get posts of users connected to user with id of ":userId"
         res.status(200).json(posts)
     } catch{
         res.status(400)
@@ -24,7 +24,7 @@ router.get('/:userId', (req,res)=>{
 
 router.post('/new/:userId', upload.single('image'), (req,res)=>{
     try{
-        // createPost(req.body, req.params.userId)
+        createPost(req.body, req.params.userId)
         res.status(201)
     } catch(error){
         res.status(401).send(error)
