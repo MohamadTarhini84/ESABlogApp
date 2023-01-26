@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const Post = require("../models/post")
+const Notification = require("../models/notification")
 const mongoose=require("mongoose")
 const upload=require('../controllers/uploadController')
 
@@ -36,6 +37,10 @@ router.patch('/removeLike/:postId', (req, res)=>{
     removeLike(req.body,req.params.postId, res)
 })
 
+router.patch('/report/:postId', (req, res)=>{
+    addReport(req.body,req.params.postId,res)
+})
+
 async function getPosts(userId, res){
     try{
         const posts = await Post.find({userId: mongoose.Types.ObjectId(userId)})
@@ -56,6 +61,7 @@ async function createPost(userObj, userId, res){
             caption:userObj.caption
         })
         const user = await Post.create(newPost)
+        upload('image')
         res.status(201).json(user)
     } catch (error){
         const errors= handleErrors(error)
@@ -76,17 +82,32 @@ async function deletePost(userId, res){
 
 async function addLike(userObj, postId, res){
     try{
-        const data = await Post.updateOne({
+        const data = await Post.findOneAndUpdate({ //adding like
                 _id: mongoose.Types.ObjectId(postId.trim())
             }, 
             {
                 $addToSet:{
                 usersWhoLiked:{
                     username: userObj.username,
-                    id: mongoose.Types.ObjectId(userObj.id)
+                    id: mongoose.Types.ObjectId(userObj.id.trim())
                 }}
         })
-        res.status(201).json(data)
+        const noti=new Notification({ //retreiving info of liked post into notification object
+            content:'like',
+            postId: mongoose.Types.ObjectId(postId.trim()),
+            from: mongoose.Types.ObjectId(userObj.id.trim()),
+            to: mongoose.Types.ObjectId(data.userId)
+        })
+        const isNoti=await Notification.find({ //checking if retreived info already has notification entry
+            content:noti.content,
+            postId:noti.postId,
+            from: noti.from,
+            to:noti.to
+        })
+        if(isNoti.length==0){ //if not add entry
+            const sendNoti= await Notification.create(noti)
+        }
+        res.status(201).json(data) //response
     } catch (error){
         const errors= handleErrors(error)
         res.status(401).json({errors})
@@ -118,6 +139,25 @@ async function editPost(userObj, postId, res){
         res.status(201).send("Caption edited successfully!")
     } catch(error){
         const errors=handleErrors(error)
+        res.status(401).json({errors})
+    }
+}
+
+async function addReport(userObj, postId, res){
+    try{
+        const data = await Post.updateOne({
+                _id: mongoose.Types.ObjectId(postId.trim())
+            }, 
+            {
+                $addToSet:{
+                reports:{
+                    username: userObj.username,
+                    id: mongoose.Types.ObjectId(userObj.id)
+                }}
+        })
+        res.status(201).send("Post reported successfuly!")
+    } catch (error){
+        const errors= handleErrors(error)
         res.status(401).json({errors})
     }
 }

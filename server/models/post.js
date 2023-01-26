@@ -11,19 +11,23 @@ const postSchema=new mongoose.Schema({
         enum:['text', 'image', 'video', 'voice']
     },
     username: {
-        type: String,
+        type: String
     },
     caption:{
-        type:String,
+        type:String
     },
     usersWhoLiked: [{
         _id: false,
         username: String,
         id: mongoose.Schema.Types.ObjectId,
     }],
-    media: [{
-        id: String
-    }],
+    reports:[{
+        _id:false,
+        id:mongoose.Schema.Types.ObjectId,
+    }, {unique:true}],
+    mediaPath: {
+        type: String
+    },
 },{timestamps:true})
 
 module.exports = mongoose.model('post', postSchema)

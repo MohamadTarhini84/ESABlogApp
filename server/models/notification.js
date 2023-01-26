@@ -1,14 +1,17 @@
 const mongoose=require('mongoose')
 
 const notificationSchema=mongoose.Schema({
-    userId: mongoose.Schema.Types.ObjectId,
-
     content: {
         type:String,
-        enum:['follow', 'comment', 'like']
+        enum:['follow', 'comment', 'like', 'chat']
     },
-    
-    from: mongoose.Schema.Types.ObjectId
-})
+    postId:mongoose.Schema.Types.ObjectId,
+    from: mongoose.Schema.Types.ObjectId,
+    to: mongoose.Schema.Types.ObjectId,
+    isRead: {
+        type:Boolean,
+        default: false
+    }
+},{timestamps: true})
 
 module.exports = mongoose.model('notification', notificationSchema)
