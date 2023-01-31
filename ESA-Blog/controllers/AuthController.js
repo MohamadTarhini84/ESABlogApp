@@ -5,7 +5,7 @@ const bcrypt = require('bcrypt');
 
 //Create static method instead of the ones already present
 
-const createToken = (_id) => {//make it as a function since we need to generate a tken for signup and login and _id since mangodb uses it 
+const createToken = (_id) => {//make it as a function since we need to generate a token for signup and login and _id since mangodb uses it 
   //but we can name it whatever we re passing the id as an argument because it will be part of the payload
   return jwt.sign({_id}, process.env.SECRET, { expiresIn: '3d' })//first arg is part of the payload we can send multiple things but
   // never anything sensitive like a password the user will stay logged in for 3 days and then it will expire
