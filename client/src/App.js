@@ -1,20 +1,27 @@
 import './App.css';
 import Home from './pages/Home';
 import NavBar from './components/navBar';
+import LeftBar from './components/leftBar/LeftBar';
+import RightBar from './components/rightBar/RightBar';
+import Messages from './components/popups/messages'
 import {
   createBrowserRouter,
   RouterProvider,
-  Route,
   Outlet,
-  Navigate,
 } from "react-router-dom";
 
 function App() {
+
   const Layout=()=>{
     return (
       <div className="Layout">
         <NavBar/>
-        <Outlet/>
+        <div className='flex text-xs p-10'>
+            <Outlet/>
+            <Messages/>
+          <LeftBar className='self-start'/>
+          <RightBar className='self-end'/>
+        </div>
       </div>
     )
   }

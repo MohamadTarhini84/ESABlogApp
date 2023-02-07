@@ -1,3 +1,103 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components{
+    .leftBar-menu{
+      @apply flex flex-col
+    }
+
+    .leftBar-item{
+      @apply flex items-center p-2 hover:bg-gray-100 hover:cursor-pointer
+    }
+
+    .leftBar-title{
+      @apply m-3 border-t-gray-300
+    }
+
+    .rightBar-item{
+      @apply flex flex-col m-5 items-center bg-gray-50 rounded-lg shadow-xl
+    }
+
+    .rightBar-user{
+      @apply flex justify-between items-center w-full
+    }
+
+    .rightBar-buttons{
+      @apply flex items-center
+    }
+
+    .Button{
+      @apply px-4 py-1 m-1 rounded-xl text-white hover:scale-110 transition-all ease-in-out
+    }
+
+    .stories{
+      @apply w-full h-56 flex gap-2 pt-2 overflow-x-scroll shadow-lg
+    }
+}
+  
 .App {
   text-align: center;
+}
+
+img{
+    width:30px;
+    height:30px;
+    margin:5px
+}
+
+p{
+  text-align: left;
+}
+
+/* width */
+::-webkit-scrollbar {
+  width: 5px;
+  height:5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px rgba(1, 1, 1, 0.1); 
+  border-radius: 10px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: #0284c7; 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: gray; 
+}
+
+/* #edit-popup-label-patient {
+  width:70%;
+  height: 100px;
+  margin:auto;
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--dark);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  position: relative;
+  border-radius: 5px;
+  grid-column-start: 2;
+  text-align: center;
+  grid-row-start: span 3;
+} */
+
+.inputfile {
+	width: 100%;
+	height: 50px;
+	opacity: 0;
+	overflow: hidden;
+	position: absolute;
+	z-index: -1;
+    bottom:0;
+    left:0;
 }
