@@ -1,4 +1,5 @@
 import { useMsgContext } from '../../hooks/useMsgContext';
+import PersonBubble from './personBubble'
 
 function Messages(){
   var {msg,dispatch}= useMsgContext()
@@ -20,6 +21,10 @@ function Messages(){
                     onClick={handleClick}>
                 {msg===""?"hide":"show"}
               </button>
+          </div>
+          <div className='flex flex-col-reverse h-full w-full rounded-t-xl px-4'>
+            <PersonBubble switch={false}/>
+            <PersonBubble switch={true}/>
           </div>
       </div>
   )
