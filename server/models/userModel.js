@@ -36,8 +36,14 @@ const UserSchema = mongoose.Schema(
         livesin: String,
         worksAt: String,
         relationship: String,
-        followers: [] ,
-        following: []
+        followers: [{
+            username:String,
+            id: mongoose.Schema.Types.ObjectId
+        }],
+        following: [{
+            username:String,
+            id: mongoose.Schema.Types.ObjectId
+        }],
     },
     {timestamps: true}
 )

@@ -6,10 +6,11 @@ const upload=require('../controllers/uploadController')
 
 function handleErrors(error){
     let err={}
+console.log(error)
+    // Object.values(error.errors).forEach(({properties})=>{
+    //     err[properties.path]=properties.message
+    // })
 
-    Object.values(error.errors).forEach(({properties})=>{
-        err[properties.path]=properties.message
-    })
     return err
 }
 
@@ -17,7 +18,7 @@ router.get('/:userId', (req,res)=>{
     getPosts(req.params.userId, res)
 })
 
-router.post('/new/:userId',  (req,res)=>{
+router.post('/new/:userId',upload.none(),  (req,res)=>{
     createPost(req.body, req.params.userId, res)
 })
 
@@ -48,7 +49,6 @@ async function getPosts(userId, res){
     } catch (error){
         const errors= handleErrors(error)
         res.status(401).json({errors})
-        res.status(401)
     }
 }
 
@@ -61,7 +61,7 @@ async function createPost(userObj, userId, res){
             caption:userObj.caption
         })
         const user = await Post.create(newPost)
-        upload('image')
+        // upload('image')
         res.status(201).json(user)
     } catch (error){
         const errors= handleErrors(error)

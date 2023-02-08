@@ -9,11 +9,16 @@ const commentSchema=new mongoose.Schema({
         type:mongoose.Schema.Types.ObjectId,
         required:true
     },
+    content: {
+        type: String,
+        required: true,
+        enum:['text', 'image', 'video', 'voice']
+    },
     username: {
         type: String,
         required: true
     },
-    content: {
+    caption: {
         type: String,
         required: true
     },
@@ -21,9 +26,9 @@ const commentSchema=new mongoose.Schema({
         username: String,
         id: mongoose.Schema.Types.ObjectId
     }],
-    media: [{
-        id: String
+    mediaPath: [{
+        type: String
     }]
-})
+},{timestamps:true})
 
 module.exports = mongoose.model("comment", commentSchema)
