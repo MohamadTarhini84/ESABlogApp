@@ -6,10 +6,10 @@ const upload=require('../controllers/uploadController')
 
 function handleErrors(error){
     let err={}
-console.log(error)
-    // Object.values(error.errors).forEach(({properties})=>{
-    //     err[properties.path]=properties.message
-    // })
+    console.log(error)
+    Object.values(error.errors).forEach(({properties})=>{
+        err[properties.path]=properties.message
+    })
 
     return err
 }

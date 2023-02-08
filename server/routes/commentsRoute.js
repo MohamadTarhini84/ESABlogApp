@@ -1,15 +1,16 @@
 const router=require("express").Router()
-const Notification = require("../models/notification")
 const mongoose=require("mongoose")
+const Notification = require("../models/notification")
+const Post = require("../models/post")
 const Comment = require("../models/comment")
 const upload=require('../controllers/uploadController')
 
 function handleErrors(error){
     let err={}
-console.log(error)
-    // Object.values(error.errors).forEach(({properties})=>{
-    //     err[properties.path]=properties.message
-    // })
+    console.log(error)
+    Object.values(error.errors).forEach(({properties})=>{
+        err[properties.path]=properties.message
+    })
 
     return err
 }
@@ -52,7 +53,7 @@ async function getComments(postId, res){
 
 async function createComment(postObj, postId, res){ 
     try{
-        console.log(postObj)
+        const data=Post.findOne({_id:mongoose.Types.ObjectId(postId)})
         const newComment= new Comment({
             postId: mongoose.Types.ObjectId(postId.trim()),
             userId: mongoose.Types.ObjectId(postObj.userId),
@@ -67,7 +68,22 @@ async function createComment(postObj, postId, res){
         } else{
             upload.single('image')
             console.log("valid")
-            // const comment = await Comment.create(newComment)
+            const comment = await Comment.create(newComment)
+            const noti=new Notification({ //retreiving info of liked post into notification object
+                content:'comment',
+                postId: mongoose.Types.ObjectId(postId.trim()),
+                from: mongoose.Types.ObjectId(postObj.id.trim()),
+                to: mongoose.Types.ObjectId(data.userId.trim())
+            })
+            const isNoti=await Notification.find({ //checking if retreived info already has notification entry
+                content:noti.content,
+                postId:noti.postId,
+                from: noti.from,
+                to:noti.to
+            })
+            if(isNoti.length==0){ //if not add entry
+                const sendNoti= await Notification.create(noti)
+            }
             res.status(201).json("adad")
         }
     } catch (error){
@@ -99,7 +115,7 @@ async function addLike(userObj, commentId, res){
             }}
         })
         const noti=new Notification({ //retreiving info of liked post into notification object
-            content:'comment',
+            content:'like',
             postId: mongoose.Types.ObjectId(commentId.trim()),
             from: mongoose.Types.ObjectId(userObj.id.trim()),
             to: mongoose.Types.ObjectId(data.userId)
