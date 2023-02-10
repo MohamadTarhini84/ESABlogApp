@@ -20,15 +20,15 @@
     }
 
     .rightBar-user{
-      @apply flex justify-between items-center w-full
+      @apply flex justify-between items-center w-full border-b-2 border-gray-200
     }
 
     .rightBar-buttons{
-      @apply flex items-center
+      @apply flex items-center flex-wrap
     }
 
     .Button{
-      @apply px-4 py-1 m-1 rounded-xl text-white hover:scale-110 transition-all ease-in-out
+      @apply px-4 py-1 m-1 rounded-xl text-white text-ss hover:scale-110 transition-all ease-in-out
     }
 
     .stories{
@@ -72,24 +72,6 @@ p{
 ::-webkit-scrollbar-thumb:hover {
   background: gray; 
 }
-
-/* #edit-popup-label-patient {
-  width:70%;
-  height: 100px;
-  margin:auto;
-  font-size: 12px;
-  font-weight: 700;
-  color: var(--dark);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-evenly;
-  position: relative;
-  border-radius: 5px;
-  grid-column-start: 2;
-  text-align: center;
-  grid-row-start: span 3;
-} */
 
 .inputfile {
 	width: 100%;
