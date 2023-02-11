@@ -7,6 +7,9 @@ function App() {
   return (
     <ThemeContextProvider>
         <SearchPage />
+        <div>
+          <h1>test</h1>
+        </div>
     </ThemeContextProvider>
   );
 }
