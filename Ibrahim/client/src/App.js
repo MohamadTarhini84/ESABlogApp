@@ -1,15 +1,14 @@
 import './App.css';
 import SearchPage from './pages/searchPage';
 import ThemeContextProvider from './context/lightmodeContext';
+import Feeds from './components/feeds/Feeds';
 
 
 function App() {
   return (
     <ThemeContextProvider>
         <SearchPage />
-        <div>
-          <h1>test</h1>
-        </div>
+        <Feeds />
     </ThemeContextProvider>
   );
 }
