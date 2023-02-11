@@ -1,0 +1,19 @@
+.snt {
+    background-color: blanchedalmond;
+}
+
+#light {
+    background-color: #f3ebf6;
+}
+
+#dark {
+    background-color: #161414;
+}
+
+#light .switch label {
+    color: black;
+}
+
+#dark .switch label {
+    color: white;
+}
