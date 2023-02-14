@@ -36,15 +36,15 @@ function NavBar(){
                     <input type="text" placeholder='Type to search' className='rounded-lg focus:outline-none'/>
                 </div>
             </div>
-            <div className="navbar-right flex p-2 justify-between items-center w-1/4">
+            <div className="navbar-right mr-12 flex p-2 justify-between items-center w-1/4">
                 <Link to="/home" >
-                    <HomeIcon/>
+                    <HomeIcon className='m-2 hover:scale-110 hover:text-black'/>
                 </Link>
-                <MailOutlineIcon onClick={handleMsgClick} className="hover:cursor-pointer"/>
-                <NotificationsIcon onClick={handleNotiClick} className="hover:cursor-pointer"/>
+                <MailOutlineIcon onClick={handleMsgClick} className="m-2 hover:cursor-pointer hover:scale-110 hover:text-black"/>
+                <NotificationsIcon onClick={handleNotiClick} className="m-2 hover:cursor-pointer hover:scale-110 hover:text-black"/>
                 <div className='flex border-l-2 items-center border-gray-300 pl-4'>
                     <img src="adad" className='rounded-xl'/>
-                    <span className='mx-2'>John Doe</span>
+                    <span className='mx-2 mr-6'>John Doe</span>
                 </div>
             </div>
             <Notifications/>

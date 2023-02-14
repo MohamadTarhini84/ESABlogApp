@@ -18,8 +18,8 @@ router.get('/:userId', (req,res)=>{
     getPosts(req.params.userId, res)
 })
 
-router.post('/new/:userId',upload.none(),  (req,res)=>{
-    createPost(req.body, req.params.userId, res)
+router.post('/new/:userId',upload.fields([{name:'image'}]),  (req,res)=>{
+    createPost(req.body, req.files.image[0].path, req.params.userId, res)
 })
 
 router.delete('/delete/:postId',(req,res)=>{
@@ -52,16 +52,16 @@ async function getPosts(userId, res){
     }
 }
 
-async function createPost(userObj, userId, res){ 
+async function createPost(userObj, path, userId, res){ 
     try{
         const newPost= new Post({
             userId: mongoose.Types.ObjectId(userId.trim()),
             content: userObj.content,
             username:userObj.username,
-            caption:userObj.caption
+            caption:userObj.caption,
+            mediaPath:path
         })
         const user = await Post.create(newPost)
-        // upload('image')
         res.status(201).json(user)
     } catch (error){
         const errors= handleErrors(error)

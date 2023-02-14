@@ -12,6 +12,8 @@ import Tutorials from "../../assets/11.png";
 import Courses from "../../assets/12.png";
 import Fund from "../../assets/13.png";
 import {useState} from 'react'
+import KeyboardTabIcon from '@mui/icons-material/KeyboardTab';
+import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
 // import { AuthContext } from "../../context/authContext";
 // import { useContext } from "react";
 
@@ -22,20 +24,18 @@ const LeftBar = () => {
     if(sideNav===false){
       document.getElementById("mySidenav").classList.remove('-translate-x-3/4');
       setSideNav(true)
-      document.getElementById('sideNavButton').innerHTML="hide"
       
     } else{
       document.getElementById("mySidenav").classList.add('-translate-x-3/4');
       setSideNav(false)
-      document.getElementById('sideNavButton').innerHTML="show"
     }
   }
 
   return (
     <div id="mySidenav" className="leftBar absolute left-0 w-44 bg-gray-50 rounded-br-lg shadow-lg -translate-x-3/4
     transition-all ease-in-out">
-      <button id="sideNavButton" className="absolute top-2 right-2" onClick={handleSideNav} colour="blue">
-        show
+      <button id="sideNavButton" className="absolute top-2 right-2 text-gray-500" onClick={handleSideNav} colour="blue">
+        {sideNav?<KeyboardReturnIcon/>:<KeyboardTabIcon/>}
       </button>
       <div className="container">
         <div className="leftBar-menu">
