@@ -3,7 +3,7 @@ import KeyboardDoubleArrowUpIcon from '@mui/icons-material/KeyboardDoubleArrowUp
 import { useMsgContext } from '../../hooks/useMsgContext';
 import PersonBubble from './personBubble'
 import Button from '../buttons/button'
-const io=require('socket.io')
+// import {io} from 'socket.io-client'
 
 function Messages(){
   var {msg,dispatch}= useMsgContext()
