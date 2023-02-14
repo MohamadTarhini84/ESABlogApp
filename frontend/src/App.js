@@ -5,9 +5,9 @@ import { useAuthContext } from './hooks/useAuthContext'
 import Home from './pages/Home'
 import Login from './pages/Login'
 import Signup from './pages/Signup'
-import Profile from './pages/Profile'
+import Profile from './pages/profile/Profile'
 import Navbar from './components/Navbar'
-
+/*
 
 function App() {
   const { user } = useAuthContext()
@@ -39,6 +39,11 @@ function App() {
       </BrowserRouter>
     </div>
   );
+}
+*/
+
+function App() {
+  return <Profile/>;
 }
 
 export default App;

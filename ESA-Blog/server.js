@@ -20,7 +20,7 @@ app.use('/api/auth',authRoutes)
 
 // connect to db
 mongoose.set('strictQuery', false);
-mongoose.connect(process.env.MONGO_URI)///it takes time so promise
+mongoose.connect(process.env.MONGO_URL)///it takes time so promise
   .then(() => {
     console.log('connected to database')
     // listen to port
