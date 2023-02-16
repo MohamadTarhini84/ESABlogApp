@@ -11,6 +11,7 @@ const app=express()//creates an express app
 
 app.use(express.urlencoded({extended:false}))
 app.use(express.json())
+app.use('*/assets',express.static(__dirname+'/assets'))
 
 // app.use((req,res,next)=>{
 //     console.log(req.path,req.method)
@@ -23,6 +24,19 @@ app.use('/api/auth', authRoutes)
 app.use('/api//user', userRoutes)
 app.use('/api/posts', postsRoute)
 app.use('/api/comments', commentsRoute)
+
+const http=require("http").createServer()
+const io=require('socket.io')(http, {cors:{origin:"*"}})
+
+io.on('connection', (socket) =>{
+    console.log("a user connected")
+    
+    socket.on('message', (message)=>{
+        io.emit('message', message)
+    })
+})
+
+http.listen(3002, ()=>{console.log("listening on port 3002")})
 
 // connect to db
 mongoose.set('strictQuery', false);

@@ -1,40 +1,53 @@
 import Stories from 'react-insta-stories';
 
-// const storyPopup = forwardRef((props, ref) =>{
-    // const [show, setShow]=useState(false)
-    
-    // function showStory(value){
-    //     if(value){
-    //         setShow(true)
-    //     } else{
-    //         setShow(true)
-    //     }
-    // }
-
-    // useImperativeHandle(ref, ()=>{
-    //     return {
-    //         func: showStory,
-    //         value: show
-    //     }
-    // })
 function storyPopup(props){
+    function timeSince(date) {
+
+        var seconds = Math.floor((new Date() - date) / 1000);
+      
+        var interval = seconds / 31536000;
+      
+        if (interval > 1) {
+          return Math.floor(interval) + " years";
+        }
+        interval = seconds / 2592000;
+        if (interval > 1) {
+          return Math.floor(interval) + " months";
+        }
+        interval = seconds / 86400;
+        if (interval > 1) {
+          return Math.floor(interval) + " days";
+        }
+        interval = seconds / 3600;
+        if (interval > 1) {
+          return Math.floor(interval) + " hours";
+        }
+        interval = seconds / 60;
+        if (interval > 1) {
+          return Math.floor(interval) + " minutes";
+        }
+        return Math.floor(seconds) + " seconds";
+      }
 
     return (
-        <div className={`w-screen h-screen fixed flex justify-center z-20 opacity-70 bg-black top-0 left-0`} onClick={()=>props.func(false)} >
+        <div className={`w-screen h-screen fixed flex justify-center z-20 opacity-95 bg-black top-0 left-0`} onClick={()=>props.func(false)} >
             <Stories 
-                stories={[{url:"https://images.pexels.com/photos/4881619/pexels-photo-4881619.jpeg?auto=compress&cs=tinysrgb&w=1600",
+                stories={[{url:props.story.pic,
                 duration: 5000,
                 header: {
-                    heading: 'Mohit Karekar',
-                    subheading: 'Posted 30m ago',
-                    profileImage: 'https://picsum.photos/100/100',
-                },}]}
+                    heading: props.story.name,
+                    subheading: `Posted ${timeSince(Date.parse(props.story.createdAt))}`,
+                    profileImage: props.story.pfp,
+                },
+                storyContent: {
+                    width: '100%',
+                    maxWidth: '100%',
+                    maxHeight: '100%'
+                }}]}
                 defaultInterval={1500}
                 isPaused={true}
                 width={document.body.clientWidth/2}
-                height={document.body.clientWidth}
-                onAllStoriesEnd={()=>props.func(false)}
-                keyboardNavigation={true}/>
+                onAllStoriesEnd={()=>props.func(false)}/>
         </div>
     )
 }

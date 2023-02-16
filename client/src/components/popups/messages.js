@@ -3,11 +3,14 @@ import KeyboardDoubleArrowUpIcon from '@mui/icons-material/KeyboardDoubleArrowUp
 import { useMsgContext } from '../../hooks/useMsgContext';
 import PersonBubble from './personBubble'
 import Button from '../buttons/button'
-// import {io} from 'socket.io-client'
+import {io} from 'socket.io-client'
+import { useState } from 'react';
 
 function Messages(){
-  var {msg,dispatch}= useMsgContext()
-  // const socket= io('ws://localhost:3000')
+  const {msg,dispatch}= useMsgContext()
+  const [msgValue, setMsgValue]=useState()
+  const [msgArray,setMsgArray]=useState([])
+  // const socket= io('ws://localhost:3002')
 
   function handleClick(){
     if(msg===""){
@@ -16,6 +19,14 @@ function Messages(){
       dispatch({type:'msgBar',payload:""})
     }
   }
+
+  function chatHandler(){
+    // socket.emit('message', {message:msgValue,id:'123',name:'ali mantach',pfp:"/assets/ok"})
+  }
+  
+  // socket.on('message', text =>{
+  //   setMsgArray(array=>[...array, text])
+  // })
 
   return (
       <div id="myMessBar" className={`w-96 h-1/2 fixed bottom-0 right-28 flex flex-col 
@@ -28,14 +39,13 @@ function Messages(){
               </button>
               <span>Global Chat</span>
           </div>
-          <div className='flex flex-col-reverse h-full w-full rounded-t-xl px-4'>
-            <PersonBubble switch={false}/>
-            <PersonBubble switch={true}/>
+          <div className='flex flex-col-reverse h-full w-full rounded-t-xl px-4 overflow-scroll'>
+            {msgArray.map((chat)=><PersonBubble key={chat.id} chat={chat}/>)}
           </div>
           <div className='h-10 w-full flex justify-center items-center border-t-2 border-gray-400 bg-gray-300'>
             <label className='text-ss'>Send Message:</label>
-            <input type="text" className='focus:outline-none p-1 m-2 h-1/2' placeholder='Hello everyone!'/>
-            <Button>Send</Button>
+            <input type="text" onChange={(e)=>{setMsgValue(e.target.value)}} className='focus:outline-none text-black p-1 m-2 h-1/2' placeholder='Hello everyone!'/>
+            <Button onClick={chatHandler}>Send</Button>
           </div>
       </div>
   )

@@ -15,7 +15,7 @@ function handleErrors(error){
     return err
 }
 
-router.get('/comments/:postId', (req,res)=>{
+router.get('/:postId', (req,res)=>{
     getComments(req.params.postId, res)
 })
 

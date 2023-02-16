@@ -3,13 +3,13 @@ function Bubble(props){
     let colour=props.switch?"bg-green-400":"bg-blue-400";
     return (
         <div className={`flex gap-2 items-center text-white ${side}`}>
-            <img className="w-10 h-10 rounded-full"/>
+            <img src={props.chat.pfp} className="w-10 h-10 rounded-full"/>
             <div className={`${colour} rounded-3xl w-auto p-2 relative flex items-center h-6 text-ss`}>
                 {!props.switch && <span className="text-sxs absolute -top-4 left-0">
-                    Ali Mantach:
+                    {props.chat.name}
                 </span>}
-                <span>
-                    Hello World
+                <span className="min-w-ok">
+                    {props.chat.message}
                 </span>
             </div>
         </div>

@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import StoryPopup from '../popups/story'
 
-function Stories(props){
+function Stories({story}){
     const [show, setShow]=useState(false)
 
     return (
@@ -9,7 +9,7 @@ function Stories(props){
             <img className="m-0 rounded-md w-full h-full hover:opacity-80 hover:cursor-pointer" 
                     src="https://images.pexels.com/photos/4881619/pexels-photo-4881619.jpeg?auto=compress&cs=tinysrgb&w=1600"
                     onClick={()=>setShow(true)}/>
-            {show && <StoryPopup func={()=>setShow()}/>}
+            {show && <StoryPopup func={()=>setShow()} story={story}/>}
         </div>
     )
 }
