@@ -2,12 +2,24 @@ import './Home.css'
 import Stories from '../components/home/stories'
 import PostInput from '../components/home/postInput'
 import AddIcon from '@mui/icons-material/Add';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Button from '../components/buttons/button';
 
 function Home(){
-    const [inputCheck, setCheck]=useState(false)
-    let storyInputValue;
+    const myForm=useRef()
+    const [inputCheck, setCheck]=useState(0)
+    const [inputValue, setInputValue]=useState(null)
+
+    function handleSubmit(event){
+        event.preventDefault()
+        console.log(inputValue)
+    }
+
+    function clearForm(event){
+        event.preventDefault();
+        myForm.current.reset()
+        setCheck(0);
+    }
 
     // const [stories, setStories]=useState([])
 
@@ -37,23 +49,19 @@ function Home(){
     return (
         <div className='Home p-4 w-2/3 ml-24'>
             <div className="stories">
-                <form className="min-w-ok relative w-32 rounded-md bg-black hover:cursor-pointer">
-                    <img className="m-0 rounded-md w-full h-full" 
-                        src="https://images.pexels.com/photos/4881619/pexels-photo-4881619.jpeg?auto=compress&cs=tinysrgb&w=1600"/>
-                    <div className={`w-10 h-10 rounded-full flex items-center justify-center 
-                                    absolute bottom-1 left-1 text-white bg-blue-500 ${inputCheck?"hidden":""}`}>
-                        {!inputCheck && <AddIcon/>}
+                <form ref={myForm} className="min-w-ok flex flex-col items-center justify-evenly w-32 rounded-md bg-gray-50">
+                   <div className={`w-10 h-10 hover:scale-105 hover:cursor-pointer relative rounded-full flex items-center justify-center 
+                                    text-white bg-blue-500`}>
+                        <AddIcon className='hover:cursor-pointer'/>
+                        <input type='file' className='inputfile absolute rounded-full'
+                            onChange={(e)=>{setCheck(e.target.files.length);setInputValue(e.target.files[0])}}/>
                     </div>
-                    {inputCheck && <Button className='absolute bottom-1 left-1' onClick={console.log("poggers")}>Post</Button>}
-                    <input type="file" className='inputfile absolute top-0 left-0 hover:cursor-pointer' value="" onChange={(e) => {
-                        if(e.target.value.length > 0){
-                            storyInputValue=e.target.files[0]
-                            setCheck(true)
-                            console.log(e.target.value)
-                        } else {
-                            setCheck(false)
-                            console.log("ok1")
-                        }}}/>
+                    {!inputCheck==0 && <h1>{inputValue.name}</h1>}
+                    {inputCheck==0 && <h1>Upload story</h1>}
+                    <div>
+                        {!inputCheck==0 && <button className='Button bg-green-500' type='submit' onClick={(e)=>handleSubmit(e)}>Upload</button>}
+                        {!inputCheck==0 && <button className='Button bg-red-500' type='submit' onClick={(e)=>clearForm(e)}>cancel</button>}
+                    </div>
                 </form>
                 {stories && stories.map((story)=><Stories story={story}/>)}
             </div>
