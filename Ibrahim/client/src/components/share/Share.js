@@ -8,7 +8,7 @@ function Share() {
         <div className="shareTop">
         <img className="shareProfileImg" src="/assets/person/11.jpg" alt="" />
           <input
-            placeholder="What's in your mind Gigas?"
+            placeholder="What's in your mind Giga?"
             className="shareInput"
           />
         </div>

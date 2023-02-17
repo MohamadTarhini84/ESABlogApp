@@ -2,6 +2,8 @@ import "./post.css";
 import { MoreVert } from "@mui/icons-material";
 import { Users } from "../../dummyData";
 import { useState } from "react";
+import Modal from '../modal/Modal';
+
 
 function Post({ post }) {
     const [like, setLike] = useState(post.like)
@@ -40,7 +42,8 @@ function Post({ post }) {
                 <span className="postLikeCounter">{like} people like it</span>
               </div>
               <div className="postBottomRight">
-                <span className="postCommentText">{post.comment} comments</span>
+              {/* <span className="postCommentText">{post.comment} comments</span> */}
+                <span className="postCommentText"><Modal /></span>
               </div>
             </div>
           </div>
