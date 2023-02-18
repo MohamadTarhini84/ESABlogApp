@@ -12,9 +12,19 @@ function Home(){
 
     async function handleSubmit(event){
         event.preventDefault()
-        const response=await axios.post('api/stories/new',{
-
-        },{headers:{"Content-Type":"multipart/form-data"}})
+        try {const formData= new FormData()
+        formData.append('image',inputValue)
+        const response=await axios.post(
+            'api/stories/new',
+            formData,
+            {
+                headers:{
+                    "Content-Type":"multipart/form-data"
+                }
+            }
+        )} catch{
+            alert("An error occured")
+        }
     }
 
     function clearForm(event){
