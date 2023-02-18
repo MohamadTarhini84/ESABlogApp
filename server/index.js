@@ -7,6 +7,7 @@ const postsRoute=require('./routes/postsRoute')
 const commentsRoute=require('./routes/commentsRoute')
 const searchRoute=require('./routes/SearchRoute')
 
+
 dbConnect(app)
 app.use(express.json())
 app.use(express.urlencoded({extended:true}))

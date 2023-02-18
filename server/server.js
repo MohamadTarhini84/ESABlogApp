@@ -7,6 +7,7 @@ const userRoutes=require('./routes/UserRoute')
 const postsRoute=require('./routes/postsRoute')
 const commentsRoute=require('./routes/commentsRoute')
 const storiesRoute=require('./routes/storiesRoute')
+const searchRoute=require('./routes/SearchRoute')
 
 const app=express()//creates an express app
 
@@ -26,6 +27,8 @@ app.use('/api//user', userRoutes)
 app.use('/api/posts', postsRoute)
 app.use('/api/comments', commentsRoute)
 app.use('/api/stories', storiesRoute)
+app.use('/api', searchRoute)
+
 
 const http=require("http").createServer()
 const io=require('socket.io')(http, {cors:{origin:"*"}})
