@@ -1,12 +1,14 @@
 import Button  from "../buttons/button"
 import PermMediaIcon from '@mui/icons-material/PermMedia';
 import { useState, useRef } from "react";
+import Action from "../popups/actionSuccess";
 
 function PostInput(){
     const myPostForm=useRef()
     const [postType,setPostType]=useState("")
     const [caption, setCaption]=useState("")
     const [postInput, setPostInput]=useState(null)
+    const [showAction, setShowAction]=useState(false)
 
     function handleForm(event){
         event.preventDefault()
@@ -18,12 +20,12 @@ function PostInput(){
             alert("Make sure you've entered a text input")
             return
         } 
-
-        console.log("adad")
+        setShowAction(true)
     }
     
     return (
         <form ref={myPostForm} className="w-full h-36 bg-white mt-8 flex flex-col rounded-lg shadow-lg">
+            {showAction && <Action value={showAction} onClick={()=>setShowAction()} isLoading={false} action="Upload"/>}
             <div className="flex w-full h-2/3 items-center">
                 <img src=""/>
                 <textarea type="text" placeholder="What's on your mind?" className="p-2 rounded-md focus:outline-none 
