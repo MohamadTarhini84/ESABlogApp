@@ -3,16 +3,18 @@ import Stories from '../components/home/stories'
 import PostInput from '../components/home/postInput'
 import AddIcon from '@mui/icons-material/Add';
 import { useEffect, useRef, useState } from 'react';
-import Button from '../components/buttons/button';
+const axios=require('axios').default
 
 function Home(){
     const myForm=useRef()
     const [inputCheck, setCheck]=useState(0)
     const [inputValue, setInputValue]=useState(null)
 
-    function handleSubmit(event){
+    async function handleSubmit(event){
         event.preventDefault()
-        console.log(inputValue)
+        const response=await axios.post('api/stories/new',{
+
+        },{headers:{"Content-Type":"multipart/form-data"}})
     }
 
     function clearForm(event){
@@ -30,7 +32,7 @@ function Home(){
     //     } catch(error){
     //         console.log(error)
     //     }
-    // }) 
+    // },[]) 
 
     const stories=[{
         id:"1111123",
