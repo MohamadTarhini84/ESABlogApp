@@ -1,56 +1,45 @@
-import './App.css';
-import Home from './pages/Home';
-import SearchPage from './pages/SearchPage';
-import NavBar from './components/navBar';
-import LeftBar from './components/leftBar/LeftBar';
-import RightBar from './components/rightBar/RightBar';
-import Messages from './components/popups/messages'
-import {
-  createBrowserRouter,
-  RouterProvider,
-  Outlet,
-} from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
+import { useAuthContext } from './hooks/useAuthContext'
+
+// pages & components
+import Home from './pages/Home'
+import Login from './pages/Login'
+import Signup from './pages/Signup'
+// import Profile from './pages/profile/Profile'
+import Navbar from './components/navBar'
 
 function App() {
-
-  const Layout=()=>{
-    return (
-      <div className="Layout">
-        <NavBar/>
-        <div className='flex text-xs p-10'>
-            <Outlet/>
-            <Messages/>
-          <LeftBar className='self-start'/>
-          <RightBar className='self-end'/>
-        </div>
-      </div>
-    )
-  }
-
-  const router = createBrowserRouter([
-    {
-      path:'/',
-      element:<Layout/>,
-      children:[
-        {
-          path:'/',
-          element:<p>nothng to see here</p>
-        },
-        {
-          path:"/home",
-          element:<Home/>
-        },
-        {
-          path:'/Search',
-          element:<SearchPage/>
-        }
-      ]
-    }
-  ])
+  const { user } = useAuthContext()
 
   return (
     <div className="App">
-      <RouterProvider router={router}/>
+      <BrowserRouter>
+        <Navbar />
+        <div className="pages">
+          <Routes>
+            <Route 
+              path="/" 
+              element={user ? <Navigate to='/home' /> : <Navigate to="/login" /> }
+            />
+            <Route
+              path="/home"
+              element={user ? <Home/> : <Navigate to='/login'/>}
+            />
+            {/* <Route
+              path="/Profile" 
+              element={<Profile />} 
+            /> */}
+            <Route 
+              path="/login" 
+              element={!user ? <Login /> : <Navigate to="/" />} 
+            />
+            <Route 
+              path="/signup" 
+              element={!user ? <Signup /> : <Navigate to="/login" />} 
+            />
+          </Routes>
+        </div>
+      </BrowserRouter>
     </div>
   );
 }
