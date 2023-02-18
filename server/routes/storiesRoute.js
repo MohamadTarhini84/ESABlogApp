@@ -3,6 +3,7 @@ const mongoose=require("mongoose")
 const upload=require('../controllers/uploadController')
 const Story=require('../models/story')
 const User=require('../models/userModel')
+const { route } = require('./postsRoute')
 
 function handleErrors(error){
     let err={}
@@ -48,3 +49,5 @@ async function createStory(path, userId, res){
         res.status(401).json(error)
     }
 }
+
+module.exports = route
