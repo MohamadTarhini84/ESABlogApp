@@ -1,5 +1,6 @@
 import "./modal.css";
 import { useState } from "react";
+import Comments from "../comments/Comments";
 
 // import { Posts } from "../../dummyData";
 
@@ -15,20 +16,24 @@ function Modal() {
     return (
         <div>
             <button onClick={toggleModal} className="btn-modal">
-                comments
+                Comments
             </button>
 
             {modal && (
                 <div className="modal">
                     <div onClick={toggleModal} className="overlay"></div>
                     <div className="modal-content">
-                        <p>
+                        <Comments />
+
+
+                        {/* <p>
                             username:
                             comments
                         </p>
-                        {/* <p className="postCommentText">{post.comment}</p> */}
+                        <p className="postCommentText">{post.comment}</p> */}
+
                         <button className="close-modal" onClick={toggleModal}>
-                            CLOSE
+                            Close
                         </button>
                     </div>
                 </div>
