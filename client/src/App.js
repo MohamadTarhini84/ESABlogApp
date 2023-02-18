@@ -1,5 +1,6 @@
 import './App.css';
 import Home from './pages/Home';
+import SearchPage from './pages/SearchPage';
 import NavBar from './components/navBar';
 import LeftBar from './components/leftBar/LeftBar';
 import RightBar from './components/rightBar/RightBar';
@@ -38,6 +39,10 @@ function App() {
         {
           path:"/home",
           element:<Home/>
+        },
+        {
+          path:'/search',
+          element:<SearchPage/>
         }
       ]
     }
