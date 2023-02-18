@@ -50,4 +50,4 @@ async function createStory(path, userId, res){
     }
 }
 
-module.exports = route
+module.exports = router
