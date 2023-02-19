@@ -9,7 +9,7 @@ const RightBar = () => {
   }
 
   return (
-    <div className="rightBar absolute right-0 w-1/4 rounded-bl-lg">
+    <div className="rightBar absolute mt-12 right-0 w-1/4 rounded-bl-lg">
       <div className="container">
         <div className="rightBar-item">
           <span className="text-base">Suggestions For You</span>

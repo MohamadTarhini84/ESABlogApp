@@ -5,9 +5,14 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import { Link } from 'react-router-dom';
 import { useMsgContext } from '../hooks/useMsgContext';
 import Notifications from './popups/notifications';
+import {useAuthContext} from '../hooks/useAuthContext'
+import {useLogout} from '../hooks/useLogout'
 
 function NavBar(){
-    var {msg,noti,dispatch}= useMsgContext()
+    const {logout}=useLogout()
+    const {user}=useAuthContext()
+    const {msg,noti,dispatch}= useMsgContext()
+    console.log(user)
   
     function handleMsgClick(){
       if(msg===""){
@@ -43,9 +48,10 @@ function NavBar(){
                 <MailOutlineIcon onClick={handleMsgClick} className="m-2 hover:cursor-pointer hover:scale-110 hover:text-black"/>
                 <NotificationsIcon onClick={handleNotiClick} className="m-2 hover:cursor-pointer hover:scale-110 hover:text-black"/>
                 <div className='flex border-l-2 items-center border-gray-300 pl-4'>
-                    <img src="adad" className='rounded-xl'/>
-                    <span className='mx-2 mr-6'>John Doe</span>
+                    <img src="http://localhost:3001/assets/Images/1674480139398_plplpl.png" className='rounded-xl w-6 h-6'/>
+                    <span className='mx-2 mr-6'>{user.data.name}</span>
                 </div>
+                <button className='border-2 border-blue-500 rounded-md p-1' onClick={logout}>Log out</button>
             </div>
             <Notifications/>
         </div>

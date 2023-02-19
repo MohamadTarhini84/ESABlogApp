@@ -19,7 +19,11 @@ router.get('/:userId', (req,res)=>{
 })
 
 router.post('/new/:userId',upload.fields([{name:'image'}]),  (req,res)=>{
-    createPost(req.body, req.files.image[0].path, req.params.userId, res)
+    let path=""
+    if(req.files.image){
+        path = req.files.image[0].path
+    }
+    createPost(req.body, path, req.params.userId, res)
 })
 
 router.delete('/delete/:postId',(req,res)=>{

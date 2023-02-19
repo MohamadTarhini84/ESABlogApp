@@ -14,11 +14,10 @@ import Fund from "../../assets/13.png";
 import {useState} from 'react'
 import KeyboardTabIcon from '@mui/icons-material/KeyboardTab';
 import KeyboardReturnIcon from '@mui/icons-material/KeyboardReturn';
-// import { AuthContext } from "../../context/authContext";
-// import { useContext } from "react";
 
 const LeftBar = () => {
   const [sideNav, setSideNav]= useState(false)
+  
 
   function handleSideNav(){
     if(sideNav===false){
@@ -33,7 +32,7 @@ const LeftBar = () => {
 
   return (
     <div id="mySidenav" className="leftBar absolute left-0 w-44 bg-gray-50 rounded-br-lg shadow-lg -translate-x-3/4
-    transition-all ease-in-out">
+    transition-all ease-in-out mt-12">
       <button id="sideNavButton" className="absolute top-2 right-2 text-gray-500" onClick={handleSideNav} colour="blue">
         {sideNav?<KeyboardReturnIcon/>:<KeyboardTabIcon/>}
       </button>

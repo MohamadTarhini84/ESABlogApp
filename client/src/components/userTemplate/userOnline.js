@@ -1,7 +1,7 @@
 function userTemplate(props){
     return (
         <div className="userTemplate flex justify-start my-2 items-center w-full p-2">
-            <img
+            <img className="img"
             src={props.user.picture}
             alt=""
             />

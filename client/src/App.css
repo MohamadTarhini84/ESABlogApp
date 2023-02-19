@@ -8,7 +8,7 @@
     }
 
     .leftBar-item{
-      @apply flex items-center p-2 hover:bg-gray-100 hover:cursor-pointer
+      @apply flex items-center gap-4 p-2 hover:bg-gray-100 hover:cursor-pointer
     }
 
     .leftBar-title{
@@ -35,12 +35,17 @@
       @apply w-full h-56 flex gap-2 pt-2 overflow-x-scroll shadow-lg
     }
 }
+
+#mySidenav img{
+  width: 30px;
+  height: 30px;
+}
   
 .App {
   text-align: center;
 }
 
-img{
+.img{
     width:30px;
     height:30px;
     margin:5px

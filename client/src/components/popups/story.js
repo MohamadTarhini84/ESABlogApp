@@ -32,12 +32,12 @@ function storyPopup(props){
     return (
         <div className={`w-screen h-screen fixed flex justify-center z-20 opacity-95 bg-black top-0 left-0`} onClick={()=>props.func(false)} >
             <Stories 
-                stories={[{url:props.story.pic,
+                stories={[{url:props.story.storyPic,
                 duration: 5000,
                 header: {
-                    heading: props.story.name,
-                    subheading: `Posted ${timeSince(Date.parse(props.story.createdAt))}`,
-                    profileImage: props.story.pfp,
+                    heading: props.story.username,
+                    subheading: `Posted ${timeSince(Date.parse(props.story.createdAt))} ago`,
+                    profileImage: props.story.profilePic,
                 },
                 storyContent: {
                     width: '100%',

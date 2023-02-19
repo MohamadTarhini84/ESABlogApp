@@ -1,3 +1,0 @@
-PORT=4000
-MONGO_URL=mongodb+srv://suls:Nasser1275@cluster0.xjdgrzq.mongodb.net/MernApp?retryWrites=true&w=majority
-SECRET=sulsNaswKcFLu!53Ap%AJ7x4*SFvRFaGM
