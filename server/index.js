@@ -1,0 +1,18 @@
+const dbConnect=require('./config/db')
+const express=require('express')
+const app=express()
+const AuthRoute=require('./routes/AuthRoute')
+const UserRoute=require('./routes/UserRoute')
+const postsRoute=require('./routes/postsRoute')
+const commentsRoute=require('./routes/commentsRoute')
+const searchRoute=require('./routes/SearchRoute')
+
+
+dbConnect(app)
+app.use(express.json())
+app.use(express.urlencoded({extended:true}))
+app.use('/auth', AuthRoute)
+app.use('/user', UserRoute)
+app.use('/posts', postsRoute)
+app.use('/comments', commentsRoute)
+app.use('/search', searchRoute)
