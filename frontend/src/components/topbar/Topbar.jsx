@@ -1,11 +1,21 @@
 import "./topbar.css";
+import { Link } from 'react-router-dom'
 import { Search, Person, Chat, Notifications } from "@mui/icons-material";
+import { useLogout } from '../../hooks/useLogout'
+import { useAuthContext } from '../../hooks/useAuthContext'
 
-export default function Topbar() {
+const Topbar = () => {
+  const { logout } = useLogout()
+  const { user } = useAuthContext()
+
+  const handleClick = () => {
+    logout()
+  }
+
   return (
     <div className="topbarContainer">
       <div className="topbarLeft">
-        <span className="logo">Lamasocial</span>
+        <span className="logo">ESAsocial</span>
       </div>
       <div className="topbarCenter">
         <div className="searchbar">
@@ -34,9 +44,25 @@ export default function Topbar() {
             <Notifications />
             <span className="topbarIconBadge">1</span>
           </div>
+          <nav>
+          {user && (
+            <div>
+              <span>{user.username}</span>
+              <button onClick={handleClick}>Log out</button>
+            </div>
+          )}
+          {!user && (
+            <div>
+              
+              <Link to="/login">Login</Link>
+              <Link to="/signup">Signup</Link>
+            </div>
+          )}
+        </nav>
         </div>
         <img src="/assets/person/1.jpeg" alt="" className="topbarImg"/>
       </div>
     </div>
   );
 }
+export default Topbar

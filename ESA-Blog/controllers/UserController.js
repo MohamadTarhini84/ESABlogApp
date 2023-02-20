@@ -1,7 +1,15 @@
 const User = require('../models/userModel')
 const bcrypt = require('bcrypt');
 
+// get all users
+const getUsers = async (req, res) => {
+  const users = await User.find({}).sort({createdAt: -1})
+
+  res.status(200).json(users)
+}
+
 // get a User
+
 const getUser = async (req, res) => {
   const id = req.params.id;
 
@@ -21,6 +29,21 @@ const getUser = async (req, res) => {
 
 };
 
+/*
+const getUser = async (req, res) => {
+  const userId = req.query.userId;
+  const username = req.query.username;
+  try {
+    const user = userId
+      ? await User.findById(userId)
+      : await User.findOne({ username: username });
+    const { password, updatedAt, ...other } = user._doc;
+    res.status(200).json(other);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+};
+*/
 // update a user
 const UpdateUser = async (req, res) => {
   const id = req.params.id;
@@ -119,7 +142,7 @@ const UnFollowUser = async (req, res) => {
 };
 
 module.exports = {
-
+  getUsers,
   getUser,
   UpdateUser,
   DeleteUser,

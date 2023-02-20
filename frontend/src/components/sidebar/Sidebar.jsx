@@ -12,8 +12,26 @@ import {
 } from "@mui/icons-material";
 import { Users } from "../../dummyData";
 import CloseFriend from "../closeFriend/CloseFriend";
+import { useEffect, useState } from "react";
 
 export default function Sidebar() {
+
+  const [users, setUsers] = useState(null)
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      const response = await fetch('/api/user')
+      const json = await response.json()
+
+      if (response.ok) {
+        setUsers(json)
+      }
+    }
+
+    fetchUsers()
+  }, [])
+
+
   return (
     <div className="sidebar">
       <div className="sidebarWrapper">
@@ -58,8 +76,8 @@ export default function Sidebar() {
         <button className="sidebarButton">Show More</button>
         <hr className="sidebarHr" />
         <ul className="sidebarFriendList">
-          {Users.map((u) => (
-            <CloseFriend key={u.id} user={u} />
+        {users && users.map(user=> (
+          <CloseFriend user={user} key={user._id} />
           ))}
         </ul>
       </div>

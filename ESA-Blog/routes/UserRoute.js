@@ -1,5 +1,6 @@
 const express = require('express')
 const {
+    getUsers, 
     getUser, 
     UpdateUser, 
     DeleteUser,
@@ -14,7 +15,7 @@ const router = express.Router();
 //router.use(requireAuth)
 
 router.get('/:id', getUser)
-
+router.get('/',getUsers)
 router.patch('/:id', UpdateUser)
 router.delete('/:id', DeleteUser)
 router.patch('/follow/:id', followUser)

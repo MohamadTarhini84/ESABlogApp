@@ -3,8 +3,36 @@ import Topbar from "../../components/topbar/Topbar";
 import Sidebar from "../../components/sidebar/Sidebar";
 import Feed from "../../components/feed/Feed";
 import Rightbar from "../../components/rightbar/Rightbar";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { useParams } from "react-router";
 
-export default function Profile() {
+
+const Profile=()=> {
+
+  const [user, setUser] = useState('');
+  const username = useParams().username;
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const res = await fetch(`api/user/?id=63eff787cadd6d553cb06187`);
+      setUser(res.data);
+    };
+    fetchUser();
+  }, [username]);
+
+
+  /*const [user, setUser] = useState({});
+  const username = useParams().username;
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const res = await axios.get(`api/user/users/$`);
+      setUser(res.data);
+    };
+    fetchUser();
+  }, [username]);
+*/
   return (
     <>
       <Topbar />
@@ -25,12 +53,13 @@ export default function Profile() {
               />
             </div>
             <div className="profileInfo">
-                <h4 className="profileInfoName">Suls Nas</h4>
+                <h4 className="profileInfoName">{user.username}</h4>
                 <span className="profileInfoDesc">Hello my friends!</span>
             </div>
           </div>
           <div className="profileRightBottom">
             <Feed />
+         
             <Rightbar profile/>
           </div>
         </div>
@@ -38,3 +67,4 @@ export default function Profile() {
     </>
   );
 }
+export default Profile
