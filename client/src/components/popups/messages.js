@@ -1,5 +1,6 @@
 import KeyboardDoubleArrowDownIcon from '@mui/icons-material/KeyboardDoubleArrowDown';
 import KeyboardDoubleArrowUpIcon from '@mui/icons-material/KeyboardDoubleArrowUp';
+import { useAuthContext } from "../../hooks/useAuthContext";
 import { useMsgContext } from '../../hooks/useMsgContext';
 import PersonBubble from './personBubble'
 import Button from '../buttons/button'
@@ -7,10 +8,11 @@ import {io} from 'socket.io-client'
 import { useState } from 'react';
 
 function Messages(){
+  const {user}=useAuthContext()
   const {msg,dispatch}= useMsgContext()
   const [msgValue, setMsgValue]=useState()
   const [msgArray,setMsgArray]=useState([])
-  // const socket= io('ws://localhost:3002')
+  const socket= io('ws://localhost:3002')
 
   function handleClick(){
     if(msg===""){
@@ -21,12 +23,12 @@ function Messages(){
   }
 
   function chatHandler(){
-    // socket.emit('message', {message:msgValue,id:'123',name:'ali mantach',pfp:"/assets/ok"})
+    socket.emit('message', {message:msgValue,id:user.id,name:user.name,pfp:"http://localhost:3001/assets/Images/1674480139398_plplpl.png"})
   }
   
-  // socket.on('message', text =>{
-  //   setMsgArray(array=>[...array, text])
-  // })
+  socket.on('message', text =>{
+    setMsgArray(array=>[...array, text])
+  })
 
   return (
       <div id="myMessBar" className={`w-96 h-1/2 fixed bottom-0 right-28 flex flex-col 
@@ -40,7 +42,7 @@ function Messages(){
               <span>Global Chat</span>
           </div>
           <div className='flex flex-col-reverse h-full w-full rounded-t-xl px-4 overflow-scroll'>
-            {msgArray.map((chat)=><PersonBubble key={chat.id} chat={chat}/>)}
+            {msgArray.map((chat)=><PersonBubble  chat={chat}/>)}
           </div>
           <div className='h-10 w-full flex justify-center items-center border-t-2 border-gray-400 bg-gray-300'>
             <label className='text-ss'>Send Message:</label>

@@ -35,11 +35,11 @@ function Options(props){
     }
 
     return (
-        <div className="absolute flex flex-col w-24 z-10 bg-gray-50 p-1 border-2 border-gray-300 rounded-md shadow-sm">
+        <div className="absolute flex flex-col translate-y-4 w-24 z-10 bg-gray-50 p-1 border-2 border-gray-300 rounded-md shadow-sm">
             {user.data.id===props.post.userId && 
-                <button className="w-full bg-red-400 text-white" onClick={()=>handleDelete(props.post._id)}>Delete</button>}
+                <button className="w-full bg-red-400 hover:bg-red-100 text-white" onClick={()=>handleDelete(props.post._id)}>Delete</button>}
             {user.data.id===props.post.userId && 
-                <button className="w-full" onClick={toggleEdit}>Edit</button>}
+                <button className="w-full hover:bg-gray-100" onClick={toggleEdit}>Edit</button>}
             <button className="w-full hover:bg-gray-100" onClick={()=>handleReport(props.post._id)}>Report</button>
             {edit && <EditPopup cancel={()=>toggleEdit} postId={props.post._id}/>}
         </div>

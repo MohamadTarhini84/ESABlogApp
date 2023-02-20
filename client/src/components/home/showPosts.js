@@ -52,8 +52,10 @@ function Posts(props){
                         <h3 style={{fontSize:"12px"}}>{timeSince(Date.parse(props.post.createdAt))}</h3>
                     </div>
                 </div>
-                <div className="w-auto h-10 text-gray-600 rounded-full hover:bg-blue-200" onClick={toggleOption}>
-                    <MoreHorizIcon className="m-2"/>
+                <div className="w-auto h-10 ">
+                    <div className="-translate-x-8 w-10 h-10 absolute text-gray-600 rounded-full hover:bg-blue-200" onClick={toggleOption}>
+                        <MoreHorizIcon className="m-2"/>
+                    </div>
                     {option && <Options post={props.post}/>}
                 </div>
             </div>

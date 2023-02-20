@@ -3,6 +3,7 @@ const Post = require("../models/post")
 const Notification = require("../models/notification")
 const mongoose=require("mongoose")
 const upload=require('../controllers/uploadController')
+const User=require('../models/userModel')
 
 function handleErrors(error){
     let err={}
@@ -48,7 +49,10 @@ router.patch('/report/:postId', (req, res)=>{
 
 async function getPosts(userId, res){
     try{
-        const posts = await Post.find({userId: mongoose.Types.ObjectId(userId)})
+        const user=await User.find({_id:mongoose.Types.ObjectId(userId)}, 'following')
+        let following=user.map((e)=>e.following)[0]
+        console.log(following)
+        const posts = await Post.find({$or:[{userId: mongoose.Types.ObjectId(userId)}, {userId:{$in:following}}]})
         res.status(201).json(posts)
     } catch (error){
         const errors= handleErrors(error)
