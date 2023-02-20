@@ -2,7 +2,7 @@ import "./post.css";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { MoreVert } from "@mui/icons-material";
-import comment from "../../../../server/models/comment";
+import Comment from "./Comment";
 
 function PostItem({ item }) {
 
@@ -48,17 +48,23 @@ function PostItem({ item }) {
                     <div className="postBottomRight">
                         {/* <span className="postCommentText">{post.comment} comments</span> */}
                         {/* <span className="postCommentText"><Modal /></span> */}
-                        <p>hello</p>
                         <div>
                             {comment.map((item) => (
                                 <Comment key={item.id} item={item} />
                             ))}
                         </div>
-                        <div>
-                            <input
-                                placeholder="Whrite comment"
-                                className="commentInput"
+                        <div className="comment-flexbox">
+                            <h3 className="comment-text">Comment</h3>
+                            <textarea
+                                // value={text}
+                                // onChange={onChangeHandler}
+                                className="input-box"
                             />
+                            <button
+                                // onClick={onClickHandler}
+                                className="comment-button">
+                                Submit
+                            </button>
                         </div>
                     </div>
                 </div>
