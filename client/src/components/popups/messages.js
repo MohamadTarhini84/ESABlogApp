@@ -13,6 +13,8 @@ function Messages(){
   const [msgValue, setMsgValue]=useState()
   const [msgArray,setMsgArray]=useState([])
   const socket= io('ws://localhost:3002')
+  let msgArrayReverse=msgArray.slice().reverse()
+  console.log(user.data.id)
 
   function handleClick(){
     if(msg===""){
@@ -23,11 +25,12 @@ function Messages(){
   }
 
   function chatHandler(){
-    socket.emit('message', {message:msgValue,id:user.id,name:user.name,pfp:"http://localhost:3001/assets/Images/1674480139398_plplpl.png"})
+    socket.emit('message', {message:msgValue,id:user.data.id,name:user.data.name,pfp:"http://localhost:3001/assets/Images/1674480139398_plplpl.png"})
   }
   
   socket.on('message', text =>{
-    setMsgArray(array=>[...array, text])
+    // console.log(text)
+    setMsgArray(msgArray.concat(<PersonBubble key={msgArray.length} chat={text}/>))
   })
 
   return (
@@ -42,7 +45,7 @@ function Messages(){
               <span>Global Chat</span>
           </div>
           <div className='flex flex-col-reverse h-full w-full rounded-t-xl px-4 overflow-scroll'>
-            {msgArray.map((chat)=><PersonBubble  chat={chat}/>)}
+            {msgArrayReverse}
           </div>
           <div className='h-10 w-full flex justify-center items-center border-t-2 border-gray-400 bg-gray-300'>
             <label className='text-ss'>Send Message:</label>

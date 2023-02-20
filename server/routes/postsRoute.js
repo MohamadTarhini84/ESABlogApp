@@ -19,6 +19,10 @@ router.get('/:userId', (req,res)=>{
     getPosts(req.params.userId, res)
 })
 
+router.get('/post/:postId', (req, res)=>{
+    getOnePost(req.params.postId, res)
+})
+
 router.post('/new/:userId',upload.fields([{name:'image'}]),  (req,res)=>{
     let path=""
     if(req.files.image){
@@ -56,6 +60,16 @@ async function getPosts(userId, res){
         res.status(201).json(posts)
     } catch (error){
         const errors= handleErrors(error)
+        res.status(401).json({errors})
+    }
+}
+
+async function getOnePost(postId, res){
+    try{
+        const post=await Post.findOne({_id:mongoose.Types.ObjectId(postId.trim())})
+        res.status(201).json(post)
+    } catch(error){
+        const errors=handleErrors(error)
         res.status(401).json({errors})
     }
 }

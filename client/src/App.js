@@ -1,5 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom'
 import { useAuthContext } from './hooks/useAuthContext'
+import Post from './components/post/Post';
 
 // pages & components
 import './App.css';
@@ -10,8 +11,9 @@ import NavBar from './components/navBar';
 import LeftBar from './components/leftBar/LeftBar';
 import RightBar from './components/rightBar/RightBar';
 import Messages from './components/popups/messages'
+import SearchPage from './pages/SearchPage';
+import Navbar from './components/navBar';
 // import Profile from './pages/profile/Profile'
-import Navbar from './components/navBar'
 
 function App() {
   const { user } = useAuthContext()
@@ -43,6 +45,14 @@ function App() {
             <Route 
               path="/signup" 
               element={!user ? <Signup /> : <Navigate to="/login" />} 
+            />
+            <Route 
+              path="/search" 
+              element={<SearchPage />} 
+            />
+            <Route 
+              path="/post/:postId"
+              element={<Post/>}
             />
           </Routes>
         </div>

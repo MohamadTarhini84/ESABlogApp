@@ -36,14 +36,13 @@ function NavBar(){
                 <Link to="/" >
                     <span className='font-extrabold'>The Social Network</span>
                 </Link>
-                <div className='navbar-search border-gray-100 bg-white border-2 rounded-lg flex'>
-                    <SearchIcon className='hover:cursor-pointer rounded-xl'/>
-                    <input type="text" placeholder='Type to search' className='rounded-lg focus:outline-none'/>
-                </div>
             </div>
-            <div className="navbar-right mr-12 flex p-2 justify-between items-center w-1/4">
+            <div className="navbar-right mr-12 flex p-2 justify-between items-center w-1/3">
                 <Link to="/home" >
                     <HomeIcon className='m-2 hover:scale-110 hover:text-black'/>
+                </Link>
+                <Link to='/search'>
+                    <SearchIcon className='hover:cursor-pointer rounded-xl m-2 hover:scale-110 hover:text-black'/>
                 </Link>
                 <MailOutlineIcon onClick={handleMsgClick} className="m-2 hover:cursor-pointer hover:scale-110 hover:text-black"/>
                 <NotificationsIcon onClick={handleNotiClick} className="m-2 hover:cursor-pointer hover:scale-110 hover:text-black"/>

@@ -1,0 +1,22 @@
+.commentWrapper {
+    padding: 10px;
+}
+
+.commentTop {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.commentProfileImg {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.commentBottom{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
